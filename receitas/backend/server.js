@@ -1,15 +1,15 @@
 import express from "express";
 import "dotenv/config";
+import cors from "cors";
 import receitasRoutes from "./routes/receitasRoutes.js";
-import corsMiddleware from "./middlewares/corsMiddleware.js";
-import { testarConexao } from "./database/connection.js";
+import { testarConexao } from "./database/conexao.js";
 
 // CRIANDO APLICAÇÃO
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// MIDDLEWARES
-app.use(corsMiddleware);
+// MIDDLEWARES (Libera o CORS para qualquer frontend)
+app.use(cors());
 app.use(express.json());
 
 // ROTAS (agora apontando diretamente para /receitas)

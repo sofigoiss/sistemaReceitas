@@ -1,100 +1,270 @@
-body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: #f4f7f6;
-    color: #333;
-    margin: 0;
-    padding: 20px;
+/* ===== CABEÇALHO VINTAGE ===== */
+
+.topo {
+    max-width: 1100px;
+    margin: 0 auto 28px;
+    padding: 15px 25px;
+    background: #54151b;
+    border-radius: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    box-shadow: 0 5px 15px rgba(52, 24, 19, 0.15);
 }
 
-.container {
-    max-width: 800px;
+.logo {
+    color: #fff6e5;
+    text-decoration: none;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 25px;
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+.topo nav {
+    display: flex;
+    align-items: center;
+    gap: 22px;
+}
+
+.topo nav a {
+    color: #fff6e5;
+    text-decoration: none;
+    font-size: 12px;
+    transition: color 0.3s;
+}
+
+.topo nav a:hover {
+    color: #dfb6a0;
+}
+
+/* ===== APRESENTAÇÃO ===== */
+
+.apresentacao {
+    max-width: 1000px;
+    margin: 0 auto 28px;
+    padding: 35px 25px;
+    text-align: center;
+    background: #e0cead;
+    border-radius: 25px;
+    border: 1px solid rgba(255, 246, 229, 0.5);
+}
+
+.subtitulo {
+    color: #80514a;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 3px;
+}
+
+.apresentacao h1 {
+    margin: 12px 0;
+    font-size: clamp(30px, 5vw, 46px);
+}
+
+.apresentacao p {
+    max-width: 500px;
     margin: 0 auto;
-    background: #fff;
+    font-size: 13px;
+    color: #63463d;
+}
+
+.detalhe {
+    display: block;
+    margin-top: 18px;
+    color: #72252b;
+    letter-spacing: 4px;
+}
+
+/* ===== RESPONSIVIDADE DO CABEÇALHO ===== */
+
+@media (max-width: 650px) {
+    .topo {
+        border-radius: 18px;
+        padding: 18px;
+        flex-direction: column;
+    }
+
+    .topo nav {
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 12px 18px;
+    }
+
+    .logo {
+        font-size: 24px;
+    }
+
+    .apresentacao {
+        padding: 28px 18px;
+    }
+}
+/* ===== CORREÇÃO DO VISUAL GERAL ===== */
+
+body {
+    background: #a18a70;
+    color: #391b1b;
+    font-family: 'Poppins', Arial, sans-serif;
+    padding: 25px 20px;
+}
+
+/* ÁREA PRINCIPAL DO SISTEMA */
+body > .container {
+    max-width: 950px;
+    margin: 25px auto;
     padding: 30px;
-    border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    background: #e0cead;
+    border-radius: 25px;
+    box-shadow: 0 8px 25px rgba(52, 24, 19, 0.15);
 }
 
+/* TÍTULOS */
 h1, h2 {
-    color: #2c3e50;
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    color: #54151b;
 }
 
-.form-group {
-    margin-bottom: 15px;
+body > h1,
+body > h2 {
+    text-align: center;
+}
+
+/* FORMULÁRIO */
+#formulario,
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
 }
 
 label {
     display: block;
-    margin-bottom: 5px;
-    font-weight: bold;
+    font-size: 13px;
+    font-weight: 600;
+    color: #54151b;
 }
 
-input, select {
+input,
+select {
     width: 100%;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    box-sizing: border-box;
+    min-height: 40px;
+    padding: 10px 12px;
+    border: 1px solid #c3a98c;
+    border-radius: 8px;
+    background: #fff6e5;
+    font-family: 'Poppins', Arial, sans-serif;
+    color: #391b1b;
 }
 
-.btn {
-    background-color: #2ecc71;
-    color: white;
-    padding: 10px 15px;
+form button {
+    width: 100%;
+    padding: 12px;
+    background: #54151b;
+    color: #fff6e5;
     border: none;
-    border-radius: 5px;
+    border-radius: 8px;
     cursor: pointer;
-    font-weight: bold;
-    width: 100%;
 }
 
-.btn:hover {
-    background-color: #27ae60;
-}
-
-hr {
-    margin: 30px 0;
-    border: 0;
-    border-top: 1px solid #eee;
-}
-
-.grid-receitas {
+/* LISTA DE RECEITAS */
+#listaReceitas {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
-    gap: 15px;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 18px;
     margin-top: 20px;
 }
 
-.card-receita {
-    background: #fafafa;
-    border: 1px solid #ddd;
-    padding: 15px;
-    border-radius: 8px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+/* CARTÕES GERADOS PELO JAVASCRIPT */
+#listaReceitas > div {
+    min-width: 0;
+    padding: 20px;
+    background: #fff6e5;
+    border: 1px solid #d4bea1;
+    border-radius: 14px;
+    box-shadow: 0 5px 14px rgba(52, 24, 19, 0.08);
 }
 
-.card-receita h3 {
-    margin-top: 0;
-    color: #3498db;
+#listaReceitas h3 {
+    color: #72252b;
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 24px;
+    margin-bottom: 12px;
 }
+
+#listaReceitas p {
+    font-size: 13px;
+    margin: 9px 0;
+}
+
+/* BOTÕES DOS CARTÕES */
+#listaReceitas button {
+    width: 100%;
+    padding: 10px;
+    margin-top: 10px;
+    background: #72252b;
+    color: #fff6e5;
+    border: none;
+    border-radius: 7px;
+    cursor: pointer;
+}
+
+button:hover {
+    filter: brightness(1.12);
+}
+
+/* SEPARADORES */
+hr {
+    border: none;
+    border-top: 1px solid #c3a98c;
+    margin: 25px 0;
+}
+
+/* CELULAR */
+@media (max-width: 650px) {
+    body {
+        padding: 12px;
+    }
+
+    body > .container {
+        padding: 20px 15px;
+    }
+
+    #listaReceitas {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* ===== BOTÃO EXCLUIR RECEITA ===== */
 
 .btn-delete {
-    background-color: #e74c3c;
-    color: white;
-    border: none;
-    padding: 6px 10px;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 0.9rem;
-    margin-top: 10px;
+    display: block;
     width: 100%;
+    padding: 11px 15px;
+    margin-top: 15px;
+
+    background-color: #54151b;
+    color: #fff6e5;
+
+    border: 1px solid #54151b;
+    border-radius: 8px;
+
+    font-family: 'Poppins', Arial, sans-serif;
+    font-size: 12px;
+    font-weight: 500;
+
+    cursor: pointer;
+    transition: all 0.3s ease;
 }
 
 .btn-delete:hover {
-    background-color: #c0392b;
+    background-color: #72252b;
+    border-color: #72252b;
+    color: #ffffff;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(52, 24, 19, 0.15);
 }
 
-.empty {
-    color: #777;
-    font-style: italic;
+.btn-delete:active {
+    transform: scale(0.98);
 }

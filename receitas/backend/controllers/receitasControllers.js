@@ -1,4 +1,4 @@
-import db from "../database/conexao";
+import db from "../database/conexao.js";
 
 export async function listarReceitas(req, res) {
     try {
@@ -12,10 +12,19 @@ export async function listarReceitas(req, res) {
 export async function criarReceita(req, res) {
     try {
         const { nome, categoria, tempo_preparo, dificuldade } = req.body;
+
+        // Validação extra por segurança
+        if (!nome || !categoria || !tempo_preparo || !dificuldade) {
+            return res.status(400).json({ mensagem: "Preencha todos os campos obrigatórios!" });
+        }
+
         const sql = "INSERT INTO receitas (nome, categoria, tempo_preparo, dificuldade) VALUES (?, ?, ?, ?)";
         const [resultado] = await db.query(sql, [nome, categoria, tempo_preparo, dificuldade]);
 
-        res.status(201).json({ mensagem: "Receita cadastrada com sucesso!", id: resultado.insertId });
+        res.status(201).json({ 
+            mensagem: "Receita cadastrada com sucesso!", 
+            id: resultado.insertId 
+        });
     } catch (error) {
         res.status(500).json({ mensagem: "Erro ao cadastrar receita", erro: error.message });
     }

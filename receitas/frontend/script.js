@@ -3,6 +3,7 @@ const API_URL = 'http://localhost:3000/receitas';
 const formReceita = document.getElementById('form-receita');
 const listaReceitasDiv = document.getElementById('lista-receitas');
 
+// 1. Função para carregar e listar as receitas do backend
 async function carregarReceitas() {
     try {
         const resposta = await fetch(API_URL);
@@ -34,34 +35,40 @@ async function carregarReceitas() {
     }
 }
 
+// 2. Evento para enviar o formulário (POST)
 formReceita.addEventListener('submit', async (e) => {
     e.preventDefault();
 
     const novaReceita = {
         nome: document.getElementById('nome').value,
         categoria: document.getElementById('categoria').value,
-        tempo_preparo: document.getElementById('tempo_preparo').value,
+        tempo_preparo: Number(document.getElementById('tempo_preparo').value),
         dificuldade: document.getElementById('dificuldade').value
     };
 
     try {
         const resposta = await fetch(API_URL, {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
+            headers: {
+                'Content-Type': 'application/json'
+            },
             body: JSON.stringify(novaReceita)
         });
 
         if (resposta.ok) {
-            formReceita.reset();
-            carregarReceitas();
+            formReceita.reset(); // Limpa os campos do formulário
+            carregarReceitas();  // Atualiza a lista no ecrã imediatamente
         } else {
-            alert('Erro ao salvar receita.');
+            const erroData = await resposta.json();
+            alert('Erro ao salvar receita: ' + (erroData.mensagem || 'Erro desconhecido'));
         }
     } catch (error) {
         console.error('Erro ao enviar receita:', error);
+        alert('Não foi possível conectar ao servidor. Verifica se o backend está a rodar.');
     }
 });
 
+// 3. Função para deletar receita (DELETE)
 async function deletarReceita(id) {
     if (!confirm('Tens a certeza que queres apagar esta receita?')) return;
 
@@ -80,4 +87,5 @@ async function deletarReceita(id) {
     }
 }
 
+// Carregar as receitas assim que a página abre
 carregarReceitas();
